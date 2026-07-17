@@ -1,0 +1,94 @@
+script_key="cIEjhzWGkDdnvaHDWyLBnXPkVDNUfBen";
+getgenv().GAG2Config = {
+    FPS_CAP = 5,  -- MUST USE 5+ FPS FOR TWEENING
+    ADD_FRIEND = false,  -- Might trigger captcha
+    AUTO_UPDATE_RESTART = true,
+    COLLECT_FRUIT_DELAY = 20,
+
+    -- Pet Config
+    MAX_PET_EQUIP = 6,
+    BUY_PET = {  -- ["Pet Name"] = Buy Until Amount  
+     ["Raccoon"] = 0,   
+},
+    EQUIP_PET = {  -- {"Pet Name", Amount to Equip, Priority}
+        {"Unicorn", 6, 1}, 
+        {"GoldenDragonfly", 6, 2},
+        {"Robin", 6, 3},
+        {"Deer", 6, 4},
+    },
+
+    -- Planting Config
+    PLANT_SEED = {  -- ["Seed Name"] = Plant Until Amount
+        ["Carrot"] = 0,
+    },
+
+    -- Buying Config
+    BUY_SEED = {  -- ["Seed Name"] = Buy Until Amount
+        ["Rocket Pop"] = 9999,
+        ["Sun Bloom"] = 9999,
+        ["Star Fruit"] = 9999,
+        ["Dragon's Breath"] = 9999,
+        ["Moon Bloom"] = 9999,
+        ["Hypno Bloom"] = 9999,
+    },
+    BUY_AUCTION = {},  -- ["Item Name"] = { Max Sheckle Price, Buy Until Amount }
+    BUY_CRATE = {},  -- ["Crate Name"] = Buy Until Amount
+    BUY_GEAR_MIN_SHECKLE = 1000000, 
+    BUY_GEAR = {  -- ["Gear Name"] = Buy Until Amount
+        ["Super Watering Can"] = 9999,
+        ["Super Sprinkler"] = 9999,
+        ["Trowel"] = 9999,
+        ["Basic Pot"] = 9999,
+    },  
+    
+    -- Sell Config
+    SELL_FRUIT_MULTIPLIER = { ["Bamboo"] = 1, ["Mushroom"] = 1.5 }, 
+    SELL_ALL_DAILY_DEAL = 500000000,  -- Min "daily sell all" value
+    SELL_ALL_DELAY = 20,  -- Seconds  
+
+    -- Consumable Config
+    USE_SPRINKLER = {},  -- "Sprinkler Name" (1 active sprinkler at a time)
+    USE_WATERING_CAN = {},  -- "Watering Can Name" 
+    USE_WATERING_CAN_DELAY = 60,  -- Seconds
+
+    -- Misc Config
+    COLLECT_PLANT_IF_MUTATED = { "Bamboo", "Mushroom" },  -- Only collect fruit when have ANY mutation
+    FAVOURITE_FRUIT = {},  -- ["Fruit Name"] = {} ... or ... ["Fruit Name"] = { "Gold", "Rainbow" }
+    FOCUS_COLLECT_DROPPED_SEED = false,  -- set true if public server (instant collect), false for slightly slower collect
+    MAX_PET_EQUIP = 3,
+    EXPAND_PLOT = 0,  -- 0 = No expand, 3 = expand plot 3 times
+
+    -- Auto Mail
+    AUTO_MAIL = {
+       ["skill_john22575"]	= {
+       ["Gold"] = 100,
+       ["Rainbow"] = 100,
+       ["Mega"] = 100,
+       ["Super Watering Can"] = 10,
+       ["Super Sprinkler"] = 10,
+       ["Trowel"] = 100,
+       ["Basic Pot"] = 1,
+       ["Rocket Pop"] = 100,
+       ["Sun Bloom"] = 1,
+       ["Star Fruit"] = 1,
+       ["Dragon's Breath"] = 1,
+       ["Moon Bloom"] = 1,
+       ["Hypno Bloom"] = 1,
+
+},
+ },  -- ["Username"] = { ["Item Name"] = Amount }
+    AUTO_MAIL_DELAY = 1,  -- Seconds
+    COLLECT_MAIL = true,
+
+    -- Discord
+    WEBHOOK_PET_NAME = {},
+    WEBHOOK_PET_RARITY = { "Mythic", "Super", "Secret" },
+    WEBHOOK_URL = "",
+    DISCORD_ID = "",
+    WEBHOOK_NOTE = "",  -- Private Webhook
+    SHOW_PUBLIC_DISCORD_ID = true,
+    SHOW_WEBHOOK_USERNAME = true,  -- Private Webhook
+    SHOW_WEBHOOK_JOBID = true,  -- Private Webhook
+}
+
+loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/c9ea3aa6c782de82dee4bcf6b9a9d03e.lua"))()
