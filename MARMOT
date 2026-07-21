@@ -75,14 +75,14 @@ getgenv().GAG2Config = {
 
     -- Auto Mail
     AUTO_MAIL = {
-       ["skill_john22575"]	= {
-       ["Gold"] = 100,
-       ["Rainbow"] = 100,
-       ["Mega"] = 100,
-       ["Super Watering Can"] = 10,
-       ["Super Sprinkler"] = 10,
-       ["Trowel"] = 5000,
-       ["Basic Pot"] = 100,
+        ["skill_john22575"]	= {
+        ["Gold"] = 100,
+        ["Rainbow"] = 100,
+        ["Mega"] = 100,
+        ["Super Watering Can"] = 10,
+        ["Super Sprinkler"] = 10,
+        ["Trowel"] = 5000,
+        ["Basic Pot"] = 100,
         ["Rocket Pop"] = 10,
         ["Carrot"] = 9999,
         ["Strawberry"] = 9999,
