@@ -1,0 +1,147 @@
+getgenv().Config = {
+        Dashboard = {
+            Enabled = true; -- Connect to the ZekeHub dashboard so you can see live stats and control this bot from the website
+            SyncConfig = true; -- Let the dashboard change these settings live, without you re-running the script
+            GroupName = "zeke"; -- Folder name your bots show up under on the dashboard — bots sharing a name are grouped together (manage at https://zekehub.com/dashboard/gag2)
+        };
+        AutoGarden = {
+            Enabled = false; -- Master switch for the whole auto garden system
+            PlotLimit = 100; -- Max total plants on your plot (lag cap). Over this = shovel the worst
+            PlantMode = "All"; -- "All" = plant/buy any seed, "Selected" = only seeds in Whitelist
+            Whitelist = {}; -- Seeds allowed to plant/buy when PlantMode = "Selected"
+            NeverPlant = {}; -- Seeds to never plant or buy, any mode (overrides everything)
+            Sprinklers = false; -- Auto-place sprinklers you own for the growth boost
+            SprinklerTypes = {}; -- Which sprinklers to place, in priority order.
+                                 -- {} = any sprinkler you own. e.g. {"Godly Sprinkler", "Master Sprinkler"}
+            AutoWater = false; -- Auto water decaying plants to revive them
+            WateringCanTypes = {}; -- Which cans to use, priority order. {} = any can you own
+            Upgrade = false; -- At cap, swap worst plant for a better in-stock seed (false = leave plants alone)
+            KeepMutated = true; -- Never shovel mutated/variant plants
+            Purge = {}; -- Always shovel these on sight, e.g. {"Blueberry"}
+            PlantLimits = { -- Max of each seed type to keep. Over = shovel extras. Empty = no per-type cap
+                -- ["Carrot"] = 10;
+                -- ["Strawberry"] = 4;
+            };
+        };
+        AutoHarvest = {
+            Enabled = false; -- Harvest ready fruit/plants
+            MutationRule = "Any"; -- default rule for plants that don't set their own:
+                                  -- "Any"  = harvest regardless of mutation
+                                  -- "Only" = only harvest when mutated
+                                  -- "Skip" = only harvest when NOT mutated
+            Mutations = {}; -- default mutation list for Only/Skip. {} = ANY mutation.
+                            -- (Bloodlit 80x, Electric 70x, Frozen/Rainbow 40x, Starstruck 25x, Gold 10x)
+            Plants = {}; -- Which plants to harvest. {} = ALL plants, using the defaults above.
+                         -- Each entry is an object:
+                         --   { Name = "Carrot" }                                  -- uses defaults
+                         --   { Name = "Rocket Pop", Rule = "Only" }               -- only when ANY mutation
+                         --   { Name = "Rocket Pop", Rule = "Only", Mutations = {"Rainbow"} } -- only Rainbow
+                         --   { Name = "Blueberry",  Rule = "Skip" }               -- harvest unless mutated
+            Blacklist = {}; -- Plants to NEVER harvest, overrides everything (e.g. {"Eclipse Bloom"})
+            MinWeight = 0; -- Skip fruit under this weight [KG] (0 = off)
+            MaxWeight = 0; -- Skip fruit over this weight (0 = off)
+        };
+        AutoEquipPets = {
+            Enabled = false; -- Auto equip pets
+            FillRemaining = false; -- Fill leftover slots with any other benched pet
+            EquipPets = { -- ["Pet Name"] = amount to equip
+                -- ["Unicorn"] = 1;
+                -- ["Golden Dragonfly"] = 2;
+                -- ["Robin"] = 1;
+            };
+        };
+        AutoBuySlot = {
+            Enabled = false; -- Auto buy garden plot expansions when affordable
+        };
+        AutoEventSeeds = {
+            Enabled = false; -- Collect event seed spawns (gold/rainbow)
+            Types = {}; -- Seed types to collect (e.g. {"Gold", "Rainbow", "Mega"})
+        };
+        AutoSell = {
+            Enabled = false; -- Auto sell fruit
+            Fruits = {}; -- Only sell these fruit names. {} = sell everything (minus protected).
+            UseDailyDeal = false; -- Prefer Steven's Daily Deal multiplier over normal sell-all
+            MinValue = 0; -- Don't sell until pending value reaches this [$] (0 = no wait)
+            Protect = { -- Never sell fruit matching any of these (favorites always protected):
+                Mutations = {}; -- protect these mutations ({"Any"} = any mutation)
+                MinWeight = 0; -- protect fruit at/above this weight [KG] (0 = off)
+                MinSellPrice = 0; -- protect fruit at/above this sell price [$] (0 = off)
+            };
+        };
+        AutoBuyPets = {
+            Enabled = false; -- Tame/buy wild pets that spawn
+            Pets = { -- ONLY pets listed here get tamed. Not listed = ignored.
+                -- three ways to write an entry:
+                -- ["Raccoon"]   = {Sizes = {"Huge"}, Max = 3};        -- only Huge Raccoons, own up to 3
+                -- ["Dragonfly"] = {Sizes = {"Big", "Huge"}};          -- Big or Huge, unlimited
+                -- ["Frog"]      = {Sizes = {"Normal"}};               -- only Normal-size Frogs
+                -- ["Bunny"]     = {Sizes = {}};                       -- ANY size Bunny
+                -- ["Deer"]      = 5;                                  -- shorthand: any size, cap 5
+            };
+        };
+        AutoCrate = {
+            Enabled = false; -- Auto buy the crates you list below, then open them
+            Crates = { -- ["Crate Name"] = max sheckle price you'll pay per crate (0 = any price)
+                -- ["Light Crate"] = 90000;
+                -- ["Bench Crate"] = 0;
+            };
+        };
+        AutoBuyAuction = {
+            Enabled = false; -- Auto buy auction lots when the falling price drops to/under your max
+            Items = { -- ["match text"] = max sheckle price (partial name match, case-insensitive)
+                -- ["Dragon Fruit"] = 5000000;
+                -- ["Rainbow"]      = 250000000;
+            };
+        };
+        AutoBuySeeds = {
+            Enabled = false; -- Buy seeds from the seed shop
+            Mode = "All"; -- "All" = buy any in-stock seed, "Selected" = only Seeds list
+            Seeds = { -- ["Seed Name"] = max to OWN (counts seeds already held). 0/blank = unlimited
+                -- ["Carrot"] = 10;
+                -- ["Strawberry"] = 0; -- unlimited
+            };
+        };
+        AutoBuyGears = {
+            Enabled = false; -- Buy gears from the gear shop
+            Mode = "All"; -- "All" = buy any in-stock gear, "Selected" = only Gears list
+            Gears = {}; -- Gear names to buy when Mode = "Selected" (e.g. {"Watering Can"})
+        };
+       AutoMail = {
+            Enabled = false; -- Mail items to one or more players
+            ClaimMail = false; -- Auto claim incoming mail rewards
+            ItemsPerGift = 19; -- max items to pack into each gift before sending
+            Recipients = { -- list of people to mail, each with their own items + min/max
+                -- {
+                --     Username = "player1"; -- who to mail to
+                --     Items = {
+                --         -- each item: Name is required, Min/Max optional
+                --         -- Min = don't send this item until you have at least this many (0/nil = send whenever)
+                --         -- Max = total cap to ever send to this person (0/nil = unlimited)
+                --         { Name = "Seed: Carrot",  Min = 300, Max = 300 }; -- wait for 300, send in one go, stop after 300 total
+                --         { Name = "Seed: Strawberry", Min = 50 };          -- wait for 50, unlimited total
+                --         { Name = "Pet: Raccoon" };                        -- send whenever, no cap
+                --     };
+                -- },
+                -- {
+                --     Username = "player2"; -- second recipient
+                --     Items = {
+                --         { Name = "Seed: Strawberry", Min = 100, Max = 1000 };
+                --     };
+                -- },
+            };
+        };
+        PetWebhook = {
+            Enabled = false; -- Send a Discord webhook when a wild pet spawns in this alt's server
+            URL = ""; -- Discord webhook URL
+            Pets = {}; -- Only alert for these pet names ({} = alert for ALL pets)
+            PingEveryone = false; -- Add @everyone to the webhook for matching pets
+        };
+        Settings = {
+            ShowOverlay = false; -- show in-game overlay with stats and info
+            AutoCenter = false; -- Puts your character in the center of your plot repeatedly
+            FPSCap = 144; -- set fps cap
+            FPSBoost = false; -- wipe other players' plots/plants (keeps your own) for better FPS
+        };
+    };
+getgenv().scriptkey="wWBNBHsnKclmtlTuQBfSlxaCrSdKzkUm"
+loadstring(game:HttpGet("https://zekehub.com/scripts/GAG2/Main.lua"))()
